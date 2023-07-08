@@ -36,7 +36,7 @@ jobs:
       run: cd pi-draw-client && npm ci
 
     - name: Unit Test Angular
-      run: cd pi-draw-client && ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+      run: cd pi-draw-client && ng test --no-watch --no-progress --browsers=ChromeHeadless
 
     - name: Test ASP.NET Core
       run: cd pi-draw-server.Tests && dotnet test --no-build --verbosity normal
