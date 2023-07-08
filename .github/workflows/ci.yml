@@ -1,0 +1,47 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.x'
+    
+    - name: Build pi-draw-server
+      run: |
+        cd pi-draw-server
+        docker build -t pi-draw-server .
+        docker run -d --name pi-draw-server-container pi-draw-server
+
+    - name: Test Angular
+      run: cd pi-draw-client && ng test --no-watch --no-progress --browsers=ChromeHeadlessCI
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.x'
+    
+    - name: Install dependencies for Angular
+      run: cd pi-draw-client && npm ci
+
+    - name: Unit Test Angular
+      run: cd pi-draw-client && ng test --no-watch --no-progress
+
+    - name: Test ASP.NET Core
+      run: cd pi-draw-server.Tests && dotnet test --no-build --verbosity normal
