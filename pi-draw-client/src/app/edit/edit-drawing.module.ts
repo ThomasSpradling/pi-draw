@@ -6,6 +6,8 @@ import { UpdateDrawingComponent } from './update-drawing.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { DrawingCanvas } from './drawing-canvas.component';
+import { Frame } from './frame.component';
 
 const routes: Routes = [
   { path: 'create', component: CreateDrawingComponent },
@@ -19,6 +21,8 @@ const routes: Routes = [
     EditorComponent,
     FrameListComponent,
     UpdateDrawingComponent,
+    DrawingCanvas,
+    Frame,
   ],
   exports: [RouterModule],
 })

@@ -1,68 +1,98 @@
 <div class="w-[32rem] h-10 ml-[27%] mt-16 flex justify-between items-center">
   <div class="flex flex-row gap-2">
     <span
-      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-gray-100 cursor-pointer"
+      [class.bg-blue-100]="currentTool == 1"
+      (click)="changeTool(1)"
+      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-blue-100 cursor-pointer"
     >
       edit
     </span>
     <span
-      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-gray-100 cursor-pointer"
+      [class.bg-blue-100]="currentTool == 2"
+      (click)="changeTool(2)"
+      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-blue-100 cursor-pointer"
     >
       ink_eraser
     </span>
   </div>
   <div class="flex flex-row gap-2">
-    <div
-      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
-    ></div>
-    <div
-      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
-    ></div>
-    <div
-      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
-    ></div>
-    <div
-      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
-    ></div>
-    <div
-      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
-    ></div>
+    <ng-container *ngFor="let color of COLORS; let i = index">
+      <div
+        [class.border-4]="currentColor === i"
+        class="w-8 h-8 border-2 border-black hover:opacity-75 cursor-pointer"
+        [ngClass]="color.twValue"
+        (click)="changeColor(i)"
+      ></div>
+    </ng-container>
   </div>
 </div>
 <div class="flex flex-row justify-center mt-2">
+  <!-- Frame List -->
   <div class="w-32 h-[32rem] mr-10 overflow-y-scroll">
-    <div
-      class="group relative w-28 h-28 bg-gray-200 mb-4 border-2 border-gray-600 hover:border-gray-400 cursor-pointer"
-    >
+    <ng-container *ngFor="let frame of drawing.frames; let i = index">
       <div
-        class="w-8 h-8 bg-gray-300 text-teal-600 flex items-center justify-center absolute top-0 left-0"
+        [class.border-teal-600]="i === currentFrame"
+        [class.hover:border-teal-600]="i === currentFrame"
+        class="group relative w-28 h-28 bg-gray-200 mb-4 border-2 border-gray-600 hover:border-gray-400 cursor-pointer"
+        (click)="selectFrame(i)"
       >
-        1
-      </div>
-      <div class="hidden group-hover:block">
-        <span
-          class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-0 right-0 flex items-center justify-center hover:text-red-600"
+        <ui-frame
+          [frame]="drawing.frames[i]"
+          [width]="32"
+          [height]="32"
+        ></ui-frame>
+        <div
+          [class.bg-teal-600]="i === currentFrame"
+          [class.text-white]="i === currentFrame"
+          class="w-8 h-8 bg-gray-300 text-teal-600 flex items-center justify-center absolute top-0 left-0"
         >
-          delete
-        </span>
-        <span
-          class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-10 right-0 flex items-center justify-center hover:text-blue-600"
-        >
-          content_copy
-        </span>
+          {{ i + 1 }}
+        </div>
+        <div class="hidden group-hover:block">
+          <span
+            class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-0 right-0 flex items-center justify-center hover:text-red-600"
+            (click)="deleteFrame(i); $event.stopPropagation()"
+          >
+            delete
+          </span>
+          <span
+            class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-10 right-0 flex items-center justify-center hover:text-blue-600"
+            (click)="duplicateFrame(i); $event.stopPropagation()"
+          >
+            content_copy
+          </span>
+        </div>
       </div>
-    </div>
+    </ng-container>
 
     <div
       class="w-28 flex items-center justify-center py-2 border-2 border-gray-600 text-xs rounded-md hover:border-teal-600 cursor-pointer"
+      (click)="addFrame()"
     >
       Add Frame <span class="material-symbols-outlined"> add </span>
     </div>
   </div>
-  <div class="w-[32rem] h-[32rem] bg-gray-200"></div>
+
+  <!-- Canvas -->
+  <drawing-canvas
+    [frame]="drawing.frames[currentFrame]"
+    [width]="32"
+    [height]="32"
+    [currentColor]="currentColor"
+    [currentTool]="currentTool"
+    (updateFrameEvent)="updateFrame($event)"
+  ></drawing-canvas>
+
+  <!-- Preview -->
   <div class="w-48 h-[32rem] ml-20 flex flex-col items-center justify-between">
     <div class="flex flex-col gap-2 items-center">
-      <drawing-preview [size]="'sm'"></drawing-preview>
+      <drawing-preview
+        [drawing]="drawing"
+        [frame]="drawing.frames[currentFrame]"
+        [width]="32"
+        [height]="32"
+        [size]="'sm'"
+      ></drawing-preview>
       <span>12 fps</span>
     </div>
 
