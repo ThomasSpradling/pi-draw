@@ -1,0 +1,24 @@
+<div class="relative">
+  <div class="flex flex-row gap-4 overflow-y-scroll snap-x" #scroller>
+    <ng-container *ngFor="let item of items">
+      <drawing-preview
+        [size]="'md'"
+        class="item snap-center transition-all cursor-pointer"
+      ></drawing-preview>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="items.length >= 5">
+    <div
+      class="absolute -left-5 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.3)] hover:bg-[rgba(0,0,0,0.4)] cursor-pointer px-1 py-8"
+      (click)="scrollToPrevItem()"
+    >
+      <span class="material-symbols-outlined text-3xl"> chevron_left </span>
+    </div>
+    <div
+      class="absolute -right-5 top-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.3)] hover:bg-[rgba(0,0,0,0.4)] cursor-pointer px-1 py-8"
+      (click)="scrollToNextItem()"
+    >
+      <span class="material-symbols-outlined text-3xl"> chevron_right </span>
+    </div>
+  </ng-container>
+</div>

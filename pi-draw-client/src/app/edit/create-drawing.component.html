@@ -1,0 +1,83 @@
+<div class="w-[32rem] h-10 ml-[27%] mt-16 flex justify-between items-center">
+  <div class="flex flex-row gap-2">
+    <span
+      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-gray-100 cursor-pointer"
+    >
+      edit
+    </span>
+    <span
+      class="material-symbols-outlined text-3xl w-12 h-12 rounded-full p-2 hover:bg-gray-100 cursor-pointer"
+    >
+      ink_eraser
+    </span>
+  </div>
+  <div class="flex flex-row gap-2">
+    <div
+      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
+    ></div>
+    <div
+      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
+    ></div>
+    <div
+      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
+    ></div>
+    <div
+      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
+    ></div>
+    <div
+      class="w-8 h-8 border-2 border-black bg-red-400 hover:opacity-75 cursor-pointer"
+    ></div>
+  </div>
+</div>
+<div class="flex flex-row justify-center mt-2">
+  <div class="w-32 h-[32rem] mr-10 overflow-y-scroll">
+    <div
+      class="group relative w-28 h-28 bg-gray-200 mb-4 border-2 border-gray-600 hover:border-gray-400 cursor-pointer"
+    >
+      <div
+        class="w-8 h-8 bg-gray-300 text-teal-600 flex items-center justify-center absolute top-0 left-0"
+      >
+        1
+      </div>
+      <div class="hidden group-hover:block">
+        <span
+          class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-0 right-0 flex items-center justify-center hover:text-red-600"
+        >
+          delete
+        </span>
+        <span
+          class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-10 right-0 flex items-center justify-center hover:text-blue-600"
+        >
+          content_copy
+        </span>
+      </div>
+    </div>
+
+    <div
+      class="w-28 flex items-center justify-center py-2 border-2 border-gray-600 text-xs rounded-md hover:border-teal-600 cursor-pointer"
+    >
+      Add Frame <span class="material-symbols-outlined"> add </span>
+    </div>
+  </div>
+  <div class="w-[32rem] h-[32rem] bg-gray-200"></div>
+  <div class="w-48 h-[32rem] ml-20 flex flex-col items-center justify-between">
+    <div class="flex flex-col gap-2 items-center">
+      <drawing-preview [size]="'sm'"></drawing-preview>
+      <span>12 fps</span>
+    </div>
+
+    <div class="w-full flex flex-col gap-4 mb-10">
+      <button
+        class="border border-black py-2 font-bold text-blue-600 bg-gray-100 hover:opacity-70 flex items-center gap-2 justify-center"
+      >
+        <span class="material-symbols-outlined"> save </span>Save
+      </button>
+      <button
+        class="border border-black py-2 font-bold text-red-600 bg-gray-100 hover:opacity-70 flex items-center gap-2 justify-center"
+      >
+        <span class="material-symbols-outlined"> exit_to_app </span>Save and
+        Exit
+      </button>
+    </div>
+  </div>
+</div>

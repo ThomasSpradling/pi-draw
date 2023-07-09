@@ -1,0 +1,22 @@
+<div
+  *ngIf="size === 'sm'"
+  class="w-48 h-48 bg-gray-200 border-2 border-black"
+></div>
+<div *ngIf="size === 'md'" class="group w-32 h-32 bg-gray-100 relative">
+  <div class="hidden group-hover:block">
+    <span
+      class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-0 right-0 flex items-center justify-center hover:text-red-600"
+    >
+      delete
+    </span>
+    <span
+      class="material-symbols-outlined bg-gray-300 w-8 h-8 absolute top-10 right-0 flex items-center justify-center hover:text-orange-600"
+    >
+      edit
+    </span>
+  </div>
+</div>
+<div
+  *ngIf="size === 'lg'"
+  class="w-64 h-64 bg-gray-100 rounded-lg transition-all duration-300 cursor-pointer shadow-none hover:shadow-md hover:scale-105"
+></div>

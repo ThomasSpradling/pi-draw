@@ -1,0 +1,13 @@
+<div
+  class="bg-gray-600 w-16 rounded-full p-1 hover:bg-gray-700 cursor-pointer"
+  [class.cursor-not-allowed]="disabled"
+  (click)="toggleState()"
+>
+  <div
+    [class.left-8]="state"
+    [class.bg-orange-300]="state"
+    class="left-0 bg-blue-300 transition-all w-6 h-6 relative rounded-full font-bold text-[0.5rem] flex items-center justify-center"
+  >
+    {{ state ? "ON" : "OFF" }}
+  </div>
+</div>
